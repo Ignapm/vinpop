@@ -37,28 +37,25 @@
 <script>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { useCartStore } from "@/stores/cartStore"; // Importa tu store del carrito
+import { useCartStore } from "@/stores/cartStore";
 
 export default {
   name: "HeaderPage",
   setup() {
-    const searchQuery = ref(""); // Estado del input del buscador
-    const router = useRouter(); // Enlace de router para navegar a /products con resultados filtrados
+    const searchQuery = ref("");
+    const router = useRouter();
 
-    // Acceso al estado del carrito desde el store
     const cartStore = useCartStore();
 
-    // Computed property para contar los artículos en el carrito
     const cartItemCount = computed(() => {
       return cartStore.cart.reduce((total, item) => total + item.quantity, 0);
     });
 
-    // Función para manejar la búsqueda
     const searchProducts = () => {
       if (searchQuery.value.trim()) {
         router.push({
           path: "/products",
-          query: { name: searchQuery.value.trim() }, // Filtrar productos por nombre
+          query: { name: searchQuery.value.trim() },
         });
       }
     };

@@ -50,11 +50,9 @@ export default {
     const route = useRoute();
     const router = useRouter();
 
-    // Obtener el tipo desde la ruta
     const type = computed(() => route.query.type);
     const searchQuery = computed(() => route.query.name || "");
 
-    // Filtrar productos según tipo y nombre de búsqueda
     const filteredProducts = computed(() => {
       let products = [];
       if (type.value === "buy") {
@@ -68,7 +66,6 @@ export default {
         ];
       }
 
-      // Filtrar por búsqueda si existe searchQuery
       if (searchQuery.value) {
         products = products.filter((product) =>
           product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
@@ -82,7 +79,6 @@ export default {
       router.push(`/product/${id}`);
     };
 
-    // Formatear precio en euros
     const formatPrice = (price) => {
       return new Intl.NumberFormat("es-ES", {
         style: "currency",

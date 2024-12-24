@@ -58,10 +58,8 @@ export default {
   setup() {
     const cartStore = useCartStore();
 
-    // Obtener los productos del carrito
     const cartItems = computed(() => cartStore.cart);
 
-    // Calcular el precio total
     const totalPrice = computed(() => {
       return cartItems.value.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -69,7 +67,6 @@ export default {
       );
     });
 
-    // Actualizar la cantidad de un producto
     const updateQuantity = (item, quantity) => {
       if (quantity <= 0) {
         cartStore.removeFromCart(item.id);
@@ -78,12 +75,10 @@ export default {
       }
     };
 
-    // Eliminar un producto del carrito
     const removeFromCart = (item) => {
       cartStore.removeFromCart(item.id);
     };
 
-    // Formatear precio
     const formatPrice = (price) => {
       return new Intl.NumberFormat("es-ES", {
         style: "currency",
@@ -91,7 +86,6 @@ export default {
       }).format(price);
     };
 
-    // Cabeceras de la tabla
     const headers = [
       { text: "Producto", value: "name" },
       { text: "Precio", value: "price" },

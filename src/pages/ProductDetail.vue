@@ -41,12 +41,11 @@ import { useCartStore } from "@/stores/cartStore";
 export default {
   name: "ProductDetail",
   setup() {
-    const route = useRoute(); // Obtener parámetros de la URL
-    const router = useRouter(); // Usar router para navegación
-    const productsStore = useProductsStore(); // Acceder al store de productos
-    const cartStore = useCartStore(); // Acceder al store de carrito
+    const route = useRoute();
+    const router = useRouter();
+    const productsStore = useProductsStore();
+    const cartStore = useCartStore();
 
-    // Encontrar el producto actual
     const productId = parseInt(route.params.id);
     const product = computed(() =>
       productsStore.getBuyProducts
@@ -54,16 +53,13 @@ export default {
         .find((p) => p.id === productId)
     );
 
-    // Validación para asegurar que product sea un objeto válido
     if (!product.value) {
       console.error("Producto no encontrado");
       return {};
     }
 
-    // Verificar si el producto es para compra o alquiler
     const isBuy = computed(() => product.value?.type === "Compra");
 
-    // Computed property para el precio formateado
     const formattedPrice = computed(() => {
       return product.value
         ? new Intl.NumberFormat("es-ES", {
@@ -90,7 +86,7 @@ export default {
     };
 
     const goToCheckout = () => {
-      router.push("/checkout"); // Usar router correctamente
+      router.push("/checkout");
     };
 
     return {

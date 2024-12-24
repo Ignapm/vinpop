@@ -41,7 +41,6 @@ export default {
     const password = ref("");
     const error = ref("");
 
-    // Reglas de validación
     const emailRules = [
       (v) => !!v || "El correo electrónico es obligatorio.",
       (v) => /.+@.+\..+/.test(v) || "El correo electrónico debe ser válido.",

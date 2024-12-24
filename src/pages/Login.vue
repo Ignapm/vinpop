@@ -31,12 +31,11 @@ export default {
   name: "LoginPage",
   setup() {
     const authStore = useAuthStore();
-    const router = useRouter(); // Acceder al router
+    const router = useRouter();
     const username = ref("");
     const password = ref("");
     const error = ref("");
 
-    // Reglas de validación
     const usernameRules = [
       (v) => !!v || "El nombre de usuario es obligatorio.",
     ];
@@ -49,7 +48,6 @@ export default {
           password: password.value,
         });
 
-        // Redirigir al usuario a /products después del login exitoso
         router.push("/products");
       } catch (e) {
         error.value = e.message;
